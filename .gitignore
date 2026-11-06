@@ -1,0 +1,7 @@
+# Fotos originales sin optimizar (pesadas; se conservan en Drive)
+_originales/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+node_modules/

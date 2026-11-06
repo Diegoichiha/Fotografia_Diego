@@ -1,0 +1,38 @@
+{
+  "_nota": "Textos y datos de contacto del sitio. Los campos de contacto son PLACEHOLDERS: reemplazar por los reales y correr `python build.py`. Si whatsapp o instagram están vacíos, el botón no se muestra.",
+  "name": "Diego Aranzazu",
+  "name_first": "Diego",
+  "name_last": "Aranzazu",
+  "signature": "D. Aranzazu",
+  "role": "Fotografía de aves y fauna silvestre",
+  "country": "Colombia",
+  "year": 2026,
+  "url": "",
+  "description": "Portafolio de Diego Aranzazu: fotografía de aves y fauna silvestre de Colombia. Garzas, guacamayas, perdices de monte, cormoranes y más, capturadas con paciencia y luz natural.",
+  "contact": {
+    "email": "correo@ejemplo.com",
+    "whatsapp": "",
+    "instagram": ""
+  },
+  "manifesto": "Cada ave es una conversación breve con el tiempo. Espero la luz, el silencio y ese instante en que el monte se detiene. Fotografío la fauna de Colombia, el país con más especies de aves del planeta, para que otros también se queden mirando.",
+  "band_text": "Paciencia, luz natural y mucho silencio.",
+  "about": {
+    "title": "Detrás del lente",
+    "paragraphs": [
+      "Soy Diego Aranzazu, fotógrafo de naturaleza. Salgo a caminar con la cámara, los binoculares y un trípode a cuestas, y dejo que sean las aves las que marquen el ritmo del día.",
+      "Mis fotografías nacen de observar primero y disparar después: conocer los hábitos, esperar la luz correcta y respetar siempre la distancia del animal. El objetivo es que cada imagen cuente cómo vive el ave, no solo cómo se ve."
+    ],
+    "gear": [
+      ["Cámara", "Canon EOS Rebel T6"],
+      ["Alcance", "Teleobjetivo hasta 600 mm"],
+      ["Apoyo", "Trípode con cabezal de rótula"],
+      ["Campo", "Binoculares y mochila de expedición"]
+    ],
+    "principles": [
+      ["Observar primero", "Entender el comportamiento antes de levantar la cámara."],
+      ["Luz de campo", "Luz natural, sin artificios que perturben al animal."],
+      ["Distancia justa", "El ave siempre manda: si se incomoda, me retiro."]
+    ]
+  },
+  "contact_text": "¿Una impresión, una colaboración o una salida de observación? Cuéntame y te respondo pronto."
+}
