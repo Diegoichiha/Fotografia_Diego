@@ -53,6 +53,7 @@
   <nav class="nav__links" aria-label="Principal">
     <a href="#seleccion" data-nav="seleccion">Selección</a>
     <a href="#rafagas" data-nav="rafagas">Ráfagas</a>
+    <a href="#colibries" data-nav="colibries">Colibríes</a>
     <a href="#colecciones" data-nav="colecciones">Colecciones</a>
     <a href="#galeria" data-nav="galeria">Galería</a>
     <a href="#sobre-mi" data-nav="sobre-mi">Sobre mí</a>
@@ -64,10 +65,11 @@
   <nav aria-label="Menú móvil">
     <a href="#seleccion"><i class="mono">01</i>Selección</a>
     <a href="#rafagas"><i class="mono">02</i>Ráfagas</a>
-    <a href="#colecciones"><i class="mono">03</i>Colecciones</a>
-    <a href="#galeria"><i class="mono">04</i>Galería</a>
-    <a href="#sobre-mi"><i class="mono">05</i>Sobre mí</a>
-    <a href="#contacto"><i class="mono">06</i>Contacto</a>
+    <a href="#colibries"><i class="mono">03</i>Colibríes</a>
+    <a href="#colecciones"><i class="mono">04</i>Colecciones</a>
+    <a href="#galeria"><i class="mono">05</i>Galería</a>
+    <a href="#sobre-mi"><i class="mono">06</i>Sobre mí</a>
+    <a href="#contacto"><i class="mono">07</i>Contacto</a>
   </nav>
 </div>
 
@@ -128,7 +130,7 @@
     <div class="sel__track">
       <div class="sel__intro">
         <p class="eyebrow mono"><span>(02)</span> Selección</p>
-        <h2 class="display">Siete<br>encuentros<br><em>en el monte</em></h2>
+        <h2 class="display">{{SELECT_WORD}}<br>encuentros<br><em>en el monte</em></h2>
         <p class="sel__hint mono">Sigue desplazándote <i aria-hidden="true">→</i></p>
       </div>
 {{SELECT_SLIDES}}
@@ -159,6 +161,23 @@
   </div>
 </section>
 
+<!-- ═════════ Colibríes ═════════ -->
+<section class="hum" id="colibries" aria-label="Colibríes">
+  <div class="wrap hum__head">
+    <div>
+      <p class="eyebrow mono"><span>(04)</span> Colibríes</p>
+      <h2 class="display">Alas que<br><em>no descansan</em></h2>
+    </div>
+    <div class="hum__side">
+      <p class="hum__lead">Hasta ochenta aleteos por segundo, quietos en el aire solo por un instante. Estos son los colibríes que Diego ha ido encontrando.</p>
+      <a class="btn" href="#galeria" data-filter="colibries" data-magnetic><span>Ver los {{HUMMING_COUNT}} colibríes</span><i aria-hidden="true">↓</i></a>
+    </div>
+  </div>
+  <div class="hum__rows">
+{{HUMMING_ROWS}}
+  </div>
+</section>
+
 <!-- ═════════ Banda panorámica ═════════ -->
 <section class="band" aria-label="Paisaje">
   <div class="band__media">{{BAND_IMG}}</div>
@@ -169,8 +188,8 @@
 <!-- ═════════ Colecciones ═════════ -->
 <section class="coll" id="colecciones" aria-label="Colecciones">
   <div class="wrap">
-    <p class="eyebrow mono"><span>(04)</span> Colecciones</p>
-    <h2 class="display coll__title">Un mismo monte,<br><em>seis maneras de mirarlo</em></h2>
+    <p class="eyebrow mono"><span>(05)</span> Colecciones</p>
+    <h2 class="display coll__title">Un mismo monte,<br><em>{{COLL_WORD}} maneras de mirarlo</em></h2>
     <ul class="coll__list">
 {{COLL_ROWS}}
     </ul>
@@ -185,7 +204,7 @@
   <div class="wrap">
     <div class="gal__head">
       <div>
-        <p class="eyebrow mono"><span>(05)</span> Archivo</p>
+        <p class="eyebrow mono"><span>(06)</span> Archivo</p>
         <h2 class="display">Galería <em>completa</em></h2>
       </div>
       <p class="gal__count mono"><b class="gal__n">{{GALLERY_COUNT}}</b> / {{GALLERY_COUNT}} fotografías</p>
@@ -206,7 +225,7 @@
 {{ABOUT_COLLAGE}}
     </div>
     <div class="about__body">
-      <p class="eyebrow mono"><span>(06)</span> Sobre mí</p>
+      <p class="eyebrow mono"><span>(07)</span> Sobre mí</p>
       <h2 class="display">{{ABOUT_TITLE}}</h2>
       <div class="about__text">
 {{ABOUT_PARAS}}
@@ -226,7 +245,7 @@
 <!-- ═════════ Contacto ═════════ -->
 <section class="contact" id="contacto" aria-label="Contacto">
   <div class="wrap">
-    <p class="eyebrow mono"><span>(07)</span> Contacto</p>
+    <p class="eyebrow mono"><span>(08)</span> Contacto</p>
     <h2 class="contact__title display" data-words>Hablemos de aves.</h2>
     <p class="contact__text">{{CONTACT_TEXT}}</p>
     <div class="contact__links">

@@ -1,0 +1,40 @@
+IMG_0407|rapaces||Bienparado|Nyctibius sp.|Sobre la cepa|
+IMG_0408|rapaces||Bienparado|Nyctibius sp.|Camuflado en el árbol|
+IMG_0412|troncos||Momoto|Momotus sp.|Trepando|
+IMG_0413|troncos||Carpintero habado|Melanerpes sp.|Corona roja|
+IMG_0424|colibries||Colibrí||Sobre el bebedero|
+IMG_0426|troncos||Carpintero|Melanerpes sp.|En el nido|
+IMG_0433|cantores||Mielero verde|Chlorophanes spiza|Turquesa sobre musgo|
+IMG_0434|cantores||Tangara candela|Ramphocelus flammigerus|Pico plateado|
+IMG_0437-2|troncos||Capitón tucán|Semnornis ramphastinus|Plumaje de fuego|
+IMG_0439|cantores||Tordo|Molothrus sp.|Sobre el musgo|
+IMG_0443|cantores||Tangara||Verde y naranja|
+IMG_0445|cantores||Eufonia|Euphonia sp.|Pecho amarillo|
+IMG_0451|cantores||Eufonia|Euphonia sp.|Canto|
+IMG_0462|colibries||Colibrí cola de raqueta|Ocreatus underwoodii|Raquetas|
+IMG_0463|colibries||Colibrí||Pico largo|
+IMG_0464|troncos||Carpintero|Melanerpes sp.|Sobre el poste|
+IMG_0468|troncos||Momoto|Momotus sp.|Entre las hojas|
+IMG_0480|cantores||Tangara|Tangara sp.|Moteada|
+IMG_0482|cantores||Atrapamoscas social|Myiozetetes similis|Pecho amarillo|
+IMG_0487|rapaces|f|Gavilán||Alas arriba|
+IMG_0489|cantores|f|Tangara montana aliazul|Anisognathus somptuosus|Ala azul abierta|
+IMG_0500|cantores||Tangara montana aliazul|Anisognathus somptuosus|Mirando abajo|
+IMG_0506|cantores||Sangre de toro|Ramphocelus dimidiatus|Rojo oscuro|
+IMG_0507|cantores|f|Ave de monte||Aleteo|
+IMG_0510|colibries||Colibrí cola canela|Amazilia tzacatl|Cola canela|
+IMG_0513|colibries||Colibrí||Posado|
+IMG_0515|cantores||Ave de monte||Moteado|
+IMG_0518|cantores||Mielero verde|Chlorophanes spiza|Pareja|
+IMG_0523-2|troncos||Capitón tucán|Semnornis ramphastinus|Detalle|
+IMG_0525|colibries||Colibrí jacobino|Florisuga mellivora|Ala abierta|
+IMG_0526|troncos||Carpintero|Melanerpes sp.|En la guadua|
+IMG_0528|cantores||Canario|Sicalis flaveola|Naranja|
+IMG_0538|cantores||Sirirí|Tyrannus melancholicus|Contra el cielo azul|
+IMG_0539|colibries|f|Colibrí||En pleno vuelo|
+IMG_0541|cantores||Tangara candela|Ramphocelus flammigerus|Rabadilla roja|
+IMG_0543|cantores||Tangara|Tangara sp.|Verde azulado|
+IMG_0546|troncos||Torito cabecirrojo|Eubucco bourcierii|Cabeza roja|
+IMG_0553|cantores||Tordo|Molothrus sp.|De frente|
+IMG_0554|colibries|f|Colibrí ermitaño|Phaethornis sp.|Frente a frente|
+IMG_0560|cantores||Canario|Sicalis flaveola|Amarillo|

@@ -225,6 +225,21 @@ html.no-js .hero__slide:first-child{visibility:visible}
 .burst__tag--a{left:14px}.burst__tag--b{right:14px}
 .burst__tag.is-on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 
+/* ═══════════════ COLIBRÍES (cintas de fotos) ═══════════════ */
+.hum{position:relative;background:var(--bg);padding:clamp(90px,11vw,170px) 0 clamp(80px,9vw,140px);overflow:hidden;border-top:1px solid var(--line)}
+.hum__head{display:flex;justify-content:space-between;align-items:flex-end;gap:clamp(24px,4vw,70px);margin-bottom:clamp(40px,5.5vw,84px)}
+.hum__side{display:grid;gap:26px;justify-items:start;max-width:27em;padding-bottom:.6em}
+.hum__lead{color:var(--mute)}
+.hum__rows{display:grid;gap:clamp(8px,1vw,14px)}
+.hum__row{overflow:hidden}
+.hum__track{display:flex;width:max-content;will-change:transform}
+.hum__group{display:flex;gap:clamp(8px,1vw,14px);padding-right:clamp(8px,1vw,14px);flex:none}
+.hum__item{--h:clamp(150px,29vh,310px);position:relative;flex:none;display:block;height:var(--h);width:calc(var(--h) * var(--r));overflow:hidden;background:var(--c)}
+.hum__item img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s}
+.hum__item:hover img{transform:scale(1.07)}
+@media (prefers-reduced-motion:reduce){.hum__row{overflow-x:auto}}
+@media (max-width:900px){.hum__head{flex-direction:column;align-items:flex-start}.hum__item{--h:clamp(130px,22vh,200px)}}
+
 /* ═══════════════ BANDA ═══════════════ */
 .band{position:relative;height:min(100vh,940px);overflow:hidden;display:grid;place-items:center;background:var(--bg)}
 .band__media{position:absolute;left:0;right:0;top:-14%;bottom:-14%}

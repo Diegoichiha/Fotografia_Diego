@@ -1,0 +1,40 @@
+IMG_1005|cantores||Tangara multicolor|Chlorochrysa nitidissima|Sobre la hoja|
+IMG_1036|cantores||Tangara candela|Ramphocelus flammigerus|Naranja y negro|
+IMG_1037|cantores||Tangara candela|Ramphocelus flammigerus|Junto a la banana|
+IMG_1042|troncos||Carpintero bellotero|Melanerpes formicivorus|Pareja en el tronco|
+IMG_1048|rapaces||Pigua|Milvago chimachima|Sacudiendo las plumas|
+IMG_1053|troncos||Torito|Eubucco sp.|Pico amarillo|
+IMG_1062|rapaces|f|Pigua|Milvago chimachima|Vuelo|
+IMG_1072|loros||Loro de nuca amarilla|Amazona sp.|Ojo naranja|
+IMG_1079|suelo||Guacharaca|Ortalis sp.|Abanico de cola|
+IMG_1117|cantores||Semillero|Sporophila sp.|En la hierba|
+IMG_1133|colibries|f|Colibrí||Flor de áloe|
+IMG_1175|troncos||Cuco ardilla|Piaya cayana|Entre las ramas|
+IMG_1215|agua|f|Ibis|Theristicus sp.|Pico curvo|
+IMG_1226|rapaces||Gavilán caminero|Rupornis magnirostris|De cerca|
+IMG_1233|rapaces||Gavilán caminero|Rupornis magnirostris|Vigía|
+IMG_1490|cantores||Eufonia|Euphonia sp.|Dorado y azul|
+IMG_1492|cantores||Eufonia|Euphonia sp.|En la rama|
+IMG_1494|cantores||Pajarito amarillo||Pequeño|
+IMG_1497|cantores||Eufonia|Euphonia sp.|De lado|
+IMG_1501|cantores||Tangara dorada|Tangara arthus|Cabeza abajo|
+IMG_1506|cantores||Tangara dorada|Tangara arthus|Naranja intenso|
+IMG_1517|suelo||Gorrión|Arremon sp.|Entre la hojarasca|
+IMG_1521|suelo||Gorrión|Arremon sp.|Escondido|
+IMG_1523|suelo||Perdiz de monte|Odontophorus sp.|Sobre la hojarasca|
+IMG_1537|suelo||Gorrión|Arremon sp.|Picoteando|
+IMG_1545|suelo||Gorrión|Arremon sp.|Al ras del suelo|
+IMG_1550|suelo||Pava de monte|Chamaepetes sp.|Ojo azul|
+IMG_1582|fauna||Ñeque|Dasyprocta sp.|Olfateando|
+IMG_1591|cantores||Tangara|Tangara sp.|Entre las hojas|
+IMG_1592|cantores||Tangara|Tangara sp.|Antifaz amarillo|
+IMG_1597|cantores||Tangara|Tangara sp.|De frente|
+IMG_1614|cantores||Tangara|Tangara sp.|Pecho naranja|
+IMG_1622|cantores||Tangara|Tangara sp.|Azul medianoche|
+IMG_1624|cantores||Tangara|Tangara sp.|Subiendo|
+IMG_1629|colibries|f|Colibrí||Aleteo|
+IMG_1663|cantores||Tangara|Tangara sp.|Verde limón|
+IMG_1759|cantores|f|Aves de monte||Dos en la rama|
+IMG_1801|cantores||Tangara|Tangara sp.|Azul en la sombra|
+IMG_1816|troncos||Tucancito|Aulacorhynchus sp.|Contra el cielo|
+IMG_1842|colibries||Colibrí||Garganta azul|

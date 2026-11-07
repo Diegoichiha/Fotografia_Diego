@@ -111,7 +111,7 @@
     gsap.to('.progress span', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.2 } });
 
     const links = $$('.nav__links a');
-    ['seleccion', 'rafagas', 'colecciones', 'galeria', 'sobre-mi'].forEach((id) => {
+    ['seleccion', 'rafagas', 'colibries', 'colecciones', 'galeria', 'sobre-mi'].forEach((id) => {
       const sec = document.getElementById(id);
       if (!sec) return;
       ScrollTrigger.create({
@@ -316,6 +316,40 @@
     gsap.ticker.add(() => {
       const ts = tw.timeScale();
       if (Math.abs(ts - dir) > 0.01) tw.timeScale(ts + (dir - ts) * 0.045);
+    });
+  }
+
+  /* ═════════ Colibríes: cintas de fotos ═════════ */
+  function initHumming() {
+    const rows = $$('.hum__row');
+    if (!rows.length) return;
+    const tweens = [];
+    rows.forEach((row, i) => {
+      const track = $('.hum__track', row), group = $('.hum__group', row);
+      if (!track || !group) return;
+      if (reduce) return;
+      track.appendChild(group.cloneNode(true));
+      const dir0 = i % 2 === 0 ? 1 : -1;
+      const base = 70 + i * 12; // segundos por vuelta
+      const tw = gsap.fromTo(track, { xPercent: dir0 > 0 ? 0 : -50 }, { xPercent: dir0 > 0 ? -50 : 0, duration: base, ease: 'none', repeat: -1 });
+      tweens.push({ tw, dir0, hover: false });
+      row.addEventListener('pointerenter', () => { tweens[i] && (tweens[i].hover = true); });
+      row.addEventListener('pointerleave', () => { tweens[i] && (tweens[i].hover = false); });
+    });
+    if (!tweens.length) return;
+    let boost = 0;
+    ScrollTrigger.create({
+      trigger: '.hum', start: 'top bottom', end: 'bottom top',
+      onUpdate: (self) => { boost = Math.min(Math.abs(self.getVelocity()) / 220, 6) * self.direction; },
+    });
+    gsap.ticker.add(() => {
+      boost *= 0.94;
+      tweens.forEach((t) => {
+        const target = t.hover ? 0.12 : 1;
+        const want = target + (t.hover ? 0 : boost * t.dir0 * 0 + Math.abs(boost) * 0.8);
+        const ts = t.tw.timeScale();
+        t.tw.timeScale(ts + (want - ts) * 0.06);
+      });
     });
   }
 
@@ -668,6 +702,7 @@
   safe('cursor', initCursor);
   safe('hero', initHero);
   safe('marquee', initMarquee);
+  safe('humming', initHumming);
   safe('intro', initIntro);
   safe('gallery', initGallery);
   safe('collections', initCollections);

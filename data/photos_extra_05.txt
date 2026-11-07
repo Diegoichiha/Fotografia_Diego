@@ -1,0 +1,40 @@
+IMG_0561|colibries|f|Silfo colilargo|Aglaiocercus kingii|Cola de seda|
+IMG_0578|cantores||Mielero verde|Chlorophanes spiza|En el comedero|
+IMG_0581|colibries||Colibrí||Bebiendo|
+IMG_0582|troncos||Momoto|Momotus sp.|Entre los bejucos|
+IMG_0595|colibries||Colibrí||Entre las verbenas|
+IMG_0619|colibries|f|Colibrí jacobino|Florisuga mellivora|Alas extendidas|
+IMG_0626|colibries||Colibrí colilargo||Hilo de cola|
+IMG_0627|colibries||Colibrí colilargo||Garganta roja|
+IMG_0627-2|colibries||Colibrí colilargo||Entre flores moradas|
+IMG_0630|colibries|f|Colibrí jacobino|Florisuga mellivora|Entre las heliconias|
+IMG_0641|colibries|f|Colibrí ermitaño|Phaethornis sp.|Suspendido|
+IMG_0641-2|colibries|f|Colibrí ermitaño|Phaethornis sp.|Suspendido II|
+IMG_0657|rapaces||Bienparado|Nyctibius sp.|Cepa de guadua|
+IMG_0662|troncos||Carpintero|Melanerpes sp.|Corteza clara|
+IMG_0666|cantores||Ave de monte||Sobre el musgo|
+IMG_0667|cantores||Ave de monte||Erguido|
+IMG_0672|colibries||Colibrí||Descanso|
+IMG_0723|rapaces|f|Gavilán||Planeo|
+IMG_0726|cantores||Elenia|Elaenia sp.|Atenta|
+IMG_0729|rapaces|f|Gavilán||Lejos|
+IMG_0736|cantores|f|Tangara|Tangara sp.|Abanico de colores|
+IMG_0738|cantores||Picogrueso||Pico azulado|
+IMG_0745|loros||Guacamaya|Ara sp.|Asomada al nido|
+IMG_0761|colibries|f|Colibríes||Duelo en el aire|
+IMG_0778|colibries|f|Colibríes||Frente a frente|
+IMG_0812|loros||Periquito anteojudo|Forpus conspicillatus|Ala azul|
+IMG_0842|colibries|f|Colibrí||Flor rosada|
+IMG_0882|colibries|f|Colibrí||Entre abejas|
+IMG_0888|troncos||Cuco ardilla|Piaya cayana|Cola larga|
+IMG_0913|troncos||Cuco ardilla|Piaya cayana|Pico amarillo|
+IMG_0945|fauna||Ñeque|Dasyprocta sp.|En el sotobosque|
+IMG_0947|cantores||Azulejo palmero|Thraupis palmarum|Mirada hacia abajo|
+IMG_0960|cantores||Tangara|Tangara sp.|Antifaz|
+IMG_0961|cantores||Tangara|Tangara sp.|De frente|
+IMG_0966|rapaces|f|Gavilán||Sobre el bosque|
+IMG_0967|cantores||Tangara dorada|Tangara arthus|Rayas negras|
+IMG_0983|cantores||Tangara multicolor|Chlorochrysa nitidissima|Sobre el tocón|
+IMG_0984|cantores||Tangara multicolor|Chlorochrysa nitidissima|Ribete amarillo|
+IMG_0994|cantores||Tangara multicolor|Chlorochrysa nitidissima|Arcoíris|
+IMG_1001|cantores||Tangara multicolor|Chlorochrysa nitidissima|Cara a cara|

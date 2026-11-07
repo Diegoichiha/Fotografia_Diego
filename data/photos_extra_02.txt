@@ -1,0 +1,40 @@
+IMG_0202|cantores||Carriquí verde|Cyanocorax yncas|Mirada de carriquí|
+IMG_0203|troncos||Gallito de roca andino|Rupicola peruvianus|En el bosque|
+IMG_0205|cantores||Viudita|Fluvicola sp.|Blanco y negro|
+IMG_0206|cantores||Tangara|Tangara sp.|Sobre el musgo|
+IMG_0207|cantores||Tangara|Tangara sp.|De espaldas|
+IMG_0208|rapaces||Gavilán gris||Mirada atrás|
+IMG_0210|cantores||Dacnis carinegro|Dacnis lineata|Turquesa|
+IMG_0215|loros|f|Guacamaya severa|Ara severus|Vista desde abajo|
+IMG_0216|cantores||Carriquí verde|Cyanocorax yncas|Mirada al cielo|
+IMG_0217|agua||Martín pescador|Chloroceryle sp.|Al acecho|
+IMG_0219|cantores||Carriquí verde|Cyanocorax yncas|Cola larga|
+IMG_0220|agua||Garza blanca|Ardea alba|Entre el buchón|
+IMG_0221|troncos|f|Carpintero bellotero|Melanerpes formicivorus|Vuelo entre palmas|
+IMG_0222|troncos||Gallito de roca andino|Rupicola peruvianus|Rojo y gris|
+IMG_0225|loros||Periquito|Brotogeris sp.|Verde lima|
+IMG_0226|troncos|f|Carpintero bellotero|Melanerpes formicivorus|Dos en la rama|
+IMG_0228|colibries||Colibrí||Reflejos esmeralda|40,50
+IMG_0229|fauna||Ardilla|Notosciurus granatensis|Rama arriba|
+IMG_0232|cantores||Eufonia|Euphonia sp.|Azul y oro|
+IMG_0233|troncos||Carpintero|Melanerpes sp.|Detrás de la rama|
+IMG_0234|cantores||Eufonia|Euphonia sp.|Corona amarilla|
+IMG_0239|cantores||Sinsonte|Mimus gilvus|Atento|
+IMG_0242|colibries||Colibrí jacobino|Florisuga mellivora|Cuello azul|35,45
+IMG_0245|rapaces||Bienparado|Nyctibius sp.|Inmóvil|
+IMG_0250|loros||Periquito|Brotogeris sp.|Cabeza abajo|
+IMG_0253|troncos||Tucancito|Aulacorhynchus sp.|Pico rosado|
+IMG_0255|loros||Periquito|Brotogeris sp.|Colgado del techo|
+IMG_0262|cantores||Azulejo|Thraupis episcopus|Entre las flores|
+IMG_0263|cantores||Azulejo|Thraupis episcopus|Celeste|
+IMG_0267|troncos||Momoto|Momotus sp.|Cola de raqueta|
+IMG_0273|cantores||Azulejo|Thraupis episcopus|Flor de cámbulo|
+IMG_0276|troncos||Momoto|Momotus sp.|Retrato|
+IMG_0278|cantores||Azulejo palmero|Thraupis palmarum|Aseo|
+IMG_0281|troncos||Gallitos de roca andinos|Rupicola peruvianus|Pareja|
+IMG_0283|troncos||Gallito de roca andino|Rupicola peruvianus|Rojo colgado|
+IMG_0284|cantores||Azulejo palmero|Thraupis palmarum|Sobre el tocón|
+IMG_0288|troncos|f|Carpintero bellotero|Melanerpes formicivorus|Alas abiertas|
+IMG_0291|loros||Loro||Entre las flores|
+IMG_0296|troncos||Carpintero bellotero|Melanerpes formicivorus|Tronco con musgo|
+IMG_0297|cantores||Canario||Dorado|

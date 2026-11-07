@@ -1,0 +1,41 @@
+# file | group | flags(f=en vuelo) | nombre común | nombre científico | título (opcional) | foco x,y (opcional)
+IMG_0097|troncos||Momoto coroniazul|Momotus momota|Corona azul|40,50
+IMG_0100|cantores||Espiguero negro y blanco|Sporophila luctuosa|Sobre la hoja|
+IMG_0102|suelo||Pava de monte|Penelope sp.|Entre las ramas|
+IMG_0103|cantores||Ave de monte||Sobre el bejuco|
+IMG_0105|suelo||Pava de monte|Penelope sp.|Escondida|
+IMG_0108|troncos||Trepatroncos||Corteza y hojas secas|
+IMG_0114|cantores||Tangara|Tangara sp.|Máscara dorada|
+IMG_0119|rapaces|f|Águila pescadora|Pandion haliaetus|Alas abiertas|
+IMG_0123|cantores|f|Ave de monte||Abanico blanco|
+IMG_0130|cantores||Tangara dorada|Tangara arthus|Dos en la rama|
+IMG_0132|cantores||Zorzal|Turdus sp.|Entre las hojas|
+IMG_0134|troncos||Carpintero bellotero|Melanerpes formicivorus|Tronco arriba|
+IMG_0140|rapaces|f|Águila pescadora|Pandion haliaetus|Punto en el cielo|
+IMG_0142|rapaces|f|Águila pescadora|Pandion haliaetus|Cielo turquesa|
+IMG_0143|rapaces|f|Águila pescadora|Pandion haliaetus|Vuelo bajo|
+IMG_0145|troncos||Trepatroncos||Escalando|
+IMG_0149|rapaces||Águila pescadora|Pandion haliaetus|Atalaya|
+IMG_0152|cantores|f|Tangara multicolor|Chlorochrysa nitidissima|Aterrizaje de colores|
+IMG_0154|cantores||Sinsonte|Mimus gilvus|Gris azulado|
+IMG_0160|fauna||Ardilla|Notosciurus granatensis|Banquete|
+IMG_0164|rapaces||Águila pescadora|Pandion haliaetus|Entre las hojas|
+IMG_0166|loros||Guacamaya severa|Ara severus|Almuerzo|
+IMG_0170|rapaces||Pigua|Milvago chimachima|Perfil|
+IMG_0171|troncos||Momoto coroniazul|Momotus momota|Entre las heliconias|
+IMG_0172|rapaces||Búho||Camuflaje|
+IMG_0173|cantores||Sinsonte|Mimus gilvus|Contraluz de hojas|
+IMG_0175|troncos||Carpintero lineado|Dryocopus lineatus|Cresta roja|
+IMG_0176|suelo||Aves del sotobosque||Dos en el tronco|
+IMG_0181|troncos||Carpintero lineado|Dryocopus lineatus|Sobre el liquen|
+IMG_0184|loros||Loro amazónico|Amazona sp.|Verde sobre verde|
+IMG_0185|loros||Loro amazónico|Amazona sp.|Estirando el ala|
+IMG_0186|troncos||Carpintero lineado|Dryocopus lineatus|Picando|
+IMG_0186-1g|troncos||Gallito de roca andino|Rupicola peruvianus|Rojo intenso|
+IMG_0187|troncos||Carpintero lineado|Dryocopus lineatus|Retrato|
+IMG_0189|troncos||Tucancito|Aulacorhynchus sp.|Pico a la vista|
+IMG_0190|troncos||Tucancito|Aulacorhynchus sp.|Verde y rosa|
+IMG_0191|troncos||Carpintero lineado|Dryocopus lineatus|Colgado|
+IMG_0192|troncos||Tucán de montaña pechigris|Andigena hypoglauca|Entre el musgo|
+IMG_0197|rapaces||Bienparado|Nyctibius sp.|Tronco vivo|
+IMG_0200|troncos||Gallito de roca andino|Rupicola peruvianus|Cresta de fuego|

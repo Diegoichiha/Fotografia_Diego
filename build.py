@@ -9,8 +9,10 @@ Lee:    data/photos.json, data/site.json, src/index.template.html, _originales/
 Genera: img/photos/*.webp, img/about/*.webp, img/og.jpg, index.html
 """
 import json
+import os
 import sys
 import html
+from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime
 from pathlib import Path
 
@@ -101,18 +103,26 @@ def process_photo(p):
     if not src.exists():
         raise SystemExit(f"Falta el original: {src}")
     with Image.open(src) as im0:
-        im = ImageOps.exif_transpose(im0)
         exif = read_exif(im0)
-        w0, h0 = im.size
+        w0, h0 = im0.size
+        if im0.getexif().get(274, 1) in (5, 6, 7, 8):  # orientación EXIF que intercambia ancho/alto
+            w0, h0 = h0, w0
         widths = variants_for(w0, WIDTHS)
         outdir = IMG / "photos"
         outdir.mkdir(parents=True, exist_ok=True)
+        todo = []
         for w in widths:
             out = outdir / f"{f}-{w}.webp"
-            if out.exists() and not FORCE and out.stat().st_mtime >= src.stat().st_mtime:
-                continue
-            h = round(h0 * w / w0)
-            im.convert("RGB").resize((w, h), Image.LANCZOS).save(out, "WEBP", quality=QUALITY, method=6)
+            if FORCE or not out.exists() or out.stat().st_mtime < src.stat().st_mtime:
+                todo.append(w)
+        if todo:  # decodificación completa solo si hay variantes por generar
+            im = ImageOps.exif_transpose(im0).convert("RGB")
+            for w in todo:
+                h = round(h0 * w / w0)
+                im.resize((w, h), Image.LANCZOS).save(outdir / f"{f}-{w}.webp", "WEBP", quality=QUALITY, method=6)
+        else:
+            im0.draft("RGB", (256, 256))
+            im = ImageOps.exif_transpose(im0).convert("RGB")
         avg, vib = color_stats(im)
     p.update({"w": w0, "h": h0, "ratio": round(w0 / h0, 4), "widths": widths, "avg": avg, "vib": vib, "exif": exif})
     e = exif
@@ -126,6 +136,7 @@ def process_photo(p):
     if e["iso"]:
         bits.append(f"ISO {e['iso']}")
     p["meta"] = " · ".join(bits)
+    return p
 
 
 def process_about():
@@ -198,11 +209,23 @@ def img_tag(p, sizes, cls="", loading="lazy", priority=False, alt=None, style=""
     return "<img " + " ".join(attrs) + ">"
 
 
+def ttl(p):
+    return p.get("title") or p["common"]
+
+
 def species_line(p):
     s = esc(p["common"])
     if p.get("latin"):
         s += f' <i>{esc(p["latin"])}</i>'
     return s
+
+
+NUM_WORDS = {2: "Dos", 3: "Tres", 4: "Cuatro", 5: "Cinco", 6: "Seis", 7: "Siete", 8: "Ocho", 9: "Nueve", 10: "Diez", 11: "Once", 12: "Doce"}
+
+
+def num_word(n, lower=False):
+    w = NUM_WORDS.get(n, str(n))
+    return w.lower() if lower else w
 
 
 def pad(n, w=2):
@@ -217,7 +240,7 @@ def build_hero(by, cfg):
         fx, fy = p["focus"]
         sp = p["common"] + (f" — {p['latin']}" if p.get("latin") else "")
         slides.append(
-            f'<div class="hero__slide{" is-active" if i == 0 else ""}" data-title="{esc(p["title"])}" data-sp="{esc(sp)}" data-id="{esc(f)}" style="--fx:{fx}%;--fy:{fy}%;--c:{p["avg"]}">'
+            f'<div class="hero__slide{" is-active" if i == 0 else ""}" data-title="{esc(ttl(p))}" data-sp="{esc(sp)}" data-id="{esc(f)}" style="--fx:{fx}%;--fy:{fy}%;--c:{p["avg"]}">'
             + img_tag(p, "100vw", cls="hero__img", priority=(i == 0), loading="eager" if i < 2 else "lazy", alt=p["alt"])
             + "</div>"
         )
@@ -232,7 +255,7 @@ def build_hero_preload(by, cfg):
 
 
 def build_marquee(by, cfg):
-    words = ["Garzas", "Guacamayas", "Perdices de monte", "Cormoranes", "Gavilanes", "Loros", "Eufonias", "Anhingas", "Atrapamoscas", "Tinamúes"]
+    words = ["Colibríes", "Tangaras", "Guacamayas", "Perdices de monte", "Momotos", "Garzas", "Tucanes", "Carpinteros", "Gavilanes", "Eufonias", "Gallitos de roca", "Cormoranes"]
     pills = [by[f] for f in cfg["marquee_pills"]]
     parts = []
     for i, w in enumerate(words):
@@ -255,12 +278,12 @@ def build_select(by, cfg):
         p = by[f]
         out.append(
             f'''<article class="sel__slide" style="--r:{p["ratio"]};--c:{p["avg"]}">
-  <button class="sel__fig" data-lb="{esc(f)}" data-cursor="Ver" aria-label="Ampliar: {esc(p["title"])}">
+  <button class="sel__fig" data-lb="{esc(f)}" data-cursor="Ver" aria-label="Ampliar: {esc(ttl(p))}">
     <span class="sel__media">{img_tag(p, "(max-width: 800px) 80vw, 62vw", cls="sel__img")}</span>
   </button>
   <div class="sel__cap">
     <span class="sel__num">{pad(i)}</span>
-    <div><h3>{esc(p["title"])}</h3><p>{species_line(p)}</p><p class="mono">{esc(p["meta"])}</p></div>
+    <div><h3>{esc(ttl(p))}</h3><p>{species_line(p)}</p><p class="mono">{esc(p["meta"])}</p></div>
   </div>
 </article>'''
         )
@@ -291,6 +314,22 @@ def build_bursts(by, cfg):
     return "\n".join(pairs), "\n".join(index)
 
 
+def build_humming(by, photos, cat):
+    """Dos cintas con los colibríes que no están ya en otra sección destacada (hero, selección, ráfagas)."""
+    used = set(cat["hero"]) | set(cat["select"]) | {f for pair in cat["bursts"] for f in pair} | {cat["band"], cat["intro"]}
+    hum = [p for p in photos if p["group"] == "colibries" and p["file"] not in used]
+    rows = [hum[0::2], hum[1::2]]
+    out = []
+    for r in rows:
+        items = "\n".join(
+            f'<button class="hum__item" data-lb="{esc(p["file"])}" data-cursor="Ver" style="--r:{p["ratio"]};--c:{p["avg"]}" aria-label="Ampliar: {esc(ttl(p))}">'
+            + img_tag(p, "(max-width: 700px) 50vw, 30vw", alt=p["alt"]) + "</button>"
+            for p in r
+        )
+        out.append(f'<div class="hum__row"><div class="hum__track"><div class="hum__group">\n{items}\n</div></div></div>')
+    return "\n".join(out)
+
+
 def group_members(photos, key):
     if key == "flight":
         return [p for p in photos if p["flight"]]
@@ -298,7 +337,7 @@ def group_members(photos, key):
 
 
 def build_collections(by, photos, groups):
-    order = ["agua", "flight", "loros", "suelo", "cantores", "fauna"]
+    order = list(groups.keys())
     rows, previews = [], []
     for i, key in enumerate(order):
         g = groups[key]
@@ -333,10 +372,10 @@ def build_gallery(photos):
     for i, p in enumerate(photos):
         gs = p["group"] + (" flight" if p["flight"] else "")
         out.append(
-            f'''<figure class="g-item" data-id="{esc(p["file"])}" data-groups="{gs}" data-title="{esc(p["title"])}" data-common="{esc(p["common"])}" data-latin="{esc(p.get("latin", ""))}" data-meta="{esc(p["meta"])}" data-color="{p["vib"]}" style="--r:{p["ratio"]};--c:{p["avg"]}">
-  <button class="g-item__btn" aria-label="Ampliar: {esc(p["title"])}" data-cursor="Ver">
+            f'''<figure class="g-item" data-id="{esc(p["file"])}" data-groups="{gs}" data-title="{esc(ttl(p))}" data-common="{esc(p["common"] if p.get("title") else "")}" data-latin="{esc(p.get("latin", ""))}" data-meta="{esc(p["meta"])}" data-color="{p["vib"]}" style="--r:{p["ratio"]};--c:{p["avg"]}">
+  <button class="g-item__btn" aria-label="Ampliar: {esc(ttl(p))}" data-cursor="Ver">
     <span class="g-item__media">{img_tag(p, "(max-width: 700px) 50vw, (max-width: 1200px) 33vw, 25vw")}</span>
-    <span class="g-item__cap"><b>{esc(p["title"])}</b><i>{esc(p["common"])}</i></span>
+    <span class="g-item__cap"><b>{esc(ttl(p))}</b><i>{esc(p["common"] if p.get("title") else p.get("latin", ""))}</i></span>
   </button>
 </figure>'''
         )
@@ -384,12 +423,64 @@ def build_contact_links(site):
 
 
 # ───────────────────────── main ─────────────────────────
+def load_extra():
+    """data/photos_extra*.txt  ->  file|group|flags|common|latin|title|focus(x,y)   (flags: f = en vuelo)"""
+    out = []
+    for path in sorted((ROOT / "data").glob("photos_extra*.txt")):
+        for raw in path.read_text(encoding="utf-8").splitlines():
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+            parts = [x.strip() for x in line.split("|")]
+            parts += [""] * (7 - len(parts))
+            file, group, flags, common, latin, title, focus = parts[:7]
+            out.append({
+                "file": file, "group": group, "flight": "f" in flags, "common": common, "latin": latin, "title": title,
+                "focus": [int(v) for v in focus.split(",")] if focus else [50, 50],
+                "alt": common + (f" — {title}" if title else ""),
+            })
+    return out
+
+
+def stratified(items, key):
+    """Reparte los elementos de forma pareja según key: los del mismo grupo quedan lejos entre sí."""
+    groups = {}
+    for it in items:
+        groups.setdefault(key(it), []).append(it)
+    scored = []
+    for gi, (g, lst) in enumerate(sorted(groups.items())):
+        n = len(lst)
+        for i, it in enumerate(lst):
+            scored.append(((i + 0.5) / n + gi * 0.0137, g, i, it))
+    scored.sort(key=lambda t: (t[0], t[1], t[2]))
+    return [t[3] for t in scored]
+
+
+def interleave(photos):
+    """Orden de la galería: colecciones intercaladas y, dentro de cada una, especies intercaladas."""
+    by_group = {}
+    for p in photos:
+        by_group.setdefault(p["group"], []).append(p)
+    flat = []
+    for g, lst in by_group.items():
+        lst = sorted(lst, key=lambda p: p["file"])
+        spread = stratified(lst, lambda p: p["common"])
+        flat += [(g, i, len(spread), p) for i, p in enumerate(spread)]
+    gnames = sorted(by_group)
+    flat.sort(key=lambda t: ((t[1] + 0.5) / t[2] + gnames.index(t[0]) * 0.0113, t[0], t[1]))
+    return [t[3] for t in flat]
+
+
 def main():
     cat = json.loads((ROOT / "data" / "photos.json").read_text(encoding="utf-8"))
     site = json.loads((ROOT / "data" / "site.json").read_text(encoding="utf-8"))
-    photos = cat["photos"]
-    for p in photos:
-        process_photo(p)
+    photos = cat["photos"] + load_extra()
+    names = [p["file"] for p in photos]
+    dupes = {n for n in names if names.count(n) > 1}
+    assert not dupes, f"Fotos repetidas en el catálogo: {sorted(dupes)}"
+    with ProcessPoolExecutor(max_workers=max(2, (os.cpu_count() or 4) - 1)) as ex:
+        photos = list(ex.map(process_photo, photos, chunksize=2))
+    photos = interleave(photos)
     by = {p["file"]: p for p in photos}
     about = process_about()
     make_og(by[cat["hero"][0]])
@@ -456,6 +547,10 @@ def main():
         "STAT_COLLECTIONS": str(len(order)),
         "SELECT_SLIDES": build_select(by, cat),
         "SELECT_COUNT": pad(len(cat["select"])),
+        "SELECT_WORD": num_word(len(cat["select"])),
+        "COLL_WORD": num_word(len(order), lower=True),
+        "HUMMING_ROWS": build_humming(by, photos, cat),
+        "HUMMING_COUNT": str(len([p for p in photos if p["group"] == "colibries"])),
         "BURST_PAIRS": pairs,
         "BURST_INDEX": burst_index,
         "BAND_IMG": img_tag(band, "100vw", cls="band__img", alt=band["alt"]),

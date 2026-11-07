@@ -1,0 +1,40 @@
+IMG_0300|troncos||Gallito de roca andino|Rupicola peruvianus|Entre las ramas|
+IMG_0302|troncos||Gallito de roca andino|Rupicola peruvianus|Aseo rojo|
+IMG_0304|cantores||Turpial|Icterus sp.|Entre las flores|
+IMG_0305|loros||Guacamaya|Ara sp.|Entre los helechos|
+IMG_0307|loros||Guacamaya|Ara sp.|Detalle verde|
+IMG_0311|colibries|f|Colibrí||Frente a la flor|
+IMG_0318|troncos||Momoto|Momotus sp.|Mirada de lado|
+IMG_0318-1|cantores||Cacique|Cacicus sp.|Pico amarillo|
+IMG_0321|cantores||Caciques|Cacicus sp.|Dos en la rama|
+IMG_0322|cantores||Caciques|Cacicus sp.|Entre el liquen|
+IMG_0330|loros||Periquito|Forpus sp.|Verde manzana|
+IMG_0332|loros||Guacamaya|Ara sp.|Junto al nido|
+IMG_0344|loros||Periquito|Brotogeris sp.|Cara azul|
+IMG_0347|cantores||Gorrión|Atlapetes sp.|Sobre la roca|
+IMG_0350|cantores||Carriquí verde|Cyanocorax yncas|Entre las ramas|
+IMG_0353|troncos||Momoto|Momotus sp.|Cola azul|
+IMG_0354|cantores||Eufonia|Euphonia sp.|Tras la hoja|
+IMG_0356|cantores||Cacique|Cacicus sp.|En el nido|
+IMG_0358|cantores||Carriquí verde|Cyanocorax yncas|Ojo amarillo|
+IMG_0360|troncos||Capitón tucán|Semnornis ramphastinus|Joven|
+IMG_0361|cantores||Cacique|Cacicus sp.|Cola naranja|
+IMG_0364|cantores||Eufonia|Euphonia sp.|Sobre el tocón|
+IMG_0371|loros||Loro cabeciazul|Pionus menstruus|Dos en el bambú|
+IMG_0373|agua|f|Garza morena|Ardea cocoi|Cielo gris|
+IMG_0374|agua|f|Garza morena|Ardea cocoi|Alas abiertas|
+IMG_0376|cantores||Eufonia|Euphonia sp.|Cortejo|
+IMG_0377|troncos||Capitón tucán|Semnornis ramphastinus|Con semilla|
+IMG_0380|troncos||Capitón tucán|Semnornis ramphastinus|Pecho rojo|
+IMG_0383|rapaces|f|Gallinazo|Coragyps atratus|Planeo|
+IMG_0385|rapaces|f|Gallinazo|Coragyps atratus|Batida|
+IMG_0386|cantores||Eufonia|Euphonia sp.|Pareja|
+IMG_0387|rapaces|f|Gallinazo|Coragyps atratus|Lejos|
+IMG_0390|rapaces|f|Gallinazo|Coragyps atratus|Sobre la montaña|
+IMG_0391|rapaces|f|Gallinazo|Coragyps atratus|Giro|
+IMG_0392|rapaces|f|Gallinazo|Coragyps atratus|Remontando|
+IMG_0393|cantores||Tangara montana aliazul|Anisognathus somptuosus|Amarillo intenso|
+IMG_0398|agua||Garcita del ganado|Bubulcus ibis|Entre las ramas|
+IMG_0399|cantores||Tangara montana aliazul|Anisognathus somptuosus|Ala azul|
+IMG_0403|cantores||Ave de monte||Mirando arriba|
+IMG_0406|rapaces||Bienparado|Nyctibius sp.|Cepa viva|
