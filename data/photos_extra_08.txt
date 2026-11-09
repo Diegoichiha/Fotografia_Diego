@@ -1,0 +1,29 @@
+277A0360-1|suelo||Perdiz de monte|Odontophorus sp.|Sobre el musgo|
+277A0362-1|suelo||Perdiz de monte|Odontophorus sp.|De perfil|
+277A0367|cantores||Tangara montana aliazul|Anisognathus somptuosus|Cabeza abajo|
+277A0398-1|colibries|f|Colibríes||Danza en el aire|
+277A0402-1|colibries|f|Colibrí jacobino|Florisuga mellivora|Giro en el aire|
+277A0407-1|colibries|f|Colibrí jacobino|Florisuga mellivora|Ala extendida|
+277A0415-1|colibries|f|Colibrí jacobino|Florisuga mellivora|Plumas al vuelo|
+277A0416-1|colibries|f|Colibrí||Alas arriba|
+277A0418|colibries|f|Colibrí||Azul y verde|
+277A0475-1|colibries|f|Colibrí||Entre las flores azules|
+277A0477|cantores||Ave de monte||Dos en el comedero|
+277A0527-1|cantores||Ave de monte||Naranja y negro|
+277A0569|cantores||Tangara|Tangara sp.|Máscara dorada II|
+277A0602-1|cantores||Tangara multicolor|Chlorochrysa nitidissima|Entre el musgo|
+277A0603-1|cantores||Tangara multicolor|Chlorochrysa nitidissima|Rama con flor|
+277A0605-1|cantores||Tangara multicolor|Chlorochrysa nitidissima|De frente|
+277A0606-1|cantores||Tangara multicolor|Chlorochrysa nitidissima|Mirada de lado|
+IMG_0026|colibries||Colibrí cola canela|Amazilia tzacatl|Entre las bromelias|
+IMG_0032|colibries|f|Colibrí jacobino|Florisuga mellivora|Cola blanca|
+IMG_0037|colibries|f|Colibrí jacobino|Florisuga mellivora|Planeo|
+IMG_0044|colibries|f|Colibrí jacobino|Florisuga mellivora|De frente|
+IMG_0108-1|colibries||Colibrí||Sobre el liquen|
+IMG_0116|colibries|f|Colibrí||Plumaje moteado|
+IMG_0129|colibries|f|Colibrí||Pico curvo|
+IMG_0146|troncos||Momoto|Momotus sp.|Mirada de frente|
+IMG_0156|troncos||Momoto|Momotus sp.|Entre las ramas|
+IMG_0326|colibries|f|Colibrí cola de raqueta|Ocreatus underwoodii|Raquetas en vuelo|
+IMG_0370|colibries||Colibrí cola de raqueta|Ocreatus underwoodii|En la mano|
+IMG_0431|colibries|f|Colibrí||Pecho blanco|

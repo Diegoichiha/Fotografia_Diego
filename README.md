@@ -1,7 +1,7 @@
 # Diego Aranzazu — Portafolio de fotografía de aves
 
 Sitio estático (HTML + CSS + JS, sin frameworks) para el portafolio del fotógrafo de naturaleza Diego Aranzazu.
-300 fotografías de aves y fauna de Colombia (37 de colibríes), con scroll suave, scroll horizontal, comparador de ráfagas, cintas de colibríes, galería filtrable y visor a pantalla completa.
+329 fotografías de aves y fauna de Colombia (54 de colibríes), con scroll suave, scroll horizontal, comparador de ráfagas, cintas de colibríes, galería filtrable y visor a pantalla completa.
 
 ## Secciones
 
@@ -14,7 +14,7 @@ Sitio estático (HTML + CSS + JS, sin frameworks) para el portafolio del fotógr
 7. **Colibríes**: dos cintas de fotos que corren en sentidos opuestos y aceleran con el scroll.
 8. **Banda panorámica** con parallax.
 9. **Colecciones**: 9 colecciones con foto flotante que sigue el cursor; al hacer clic filtra la galería.
-10. **Galería completa**: las 300 fotos en filas justificadas, filtros animados (GSAP Flip) y visor con teclado, gestos táctiles y datos de la toma.
+10. **Galería completa**: las 329 fotos en filas justificadas, filtros animados (GSAP Flip) y visor con teclado, gestos táctiles y datos de la toma.
 11. **Sobre mí** con las fotos del fotógrafo, equipo y principios de trabajo.
 12. **Contacto** y pie de página.
 
