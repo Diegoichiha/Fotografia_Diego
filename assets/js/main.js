@@ -26,7 +26,7 @@
   /* ═════════ Scroll suave (Lenis) ═════════ */
   let lenis = null;
   if (!reduce && window.Lenis) {
-    lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), wheelMultiplier: 0.95 });
+    lenis = new Lenis({ duration: 1.0, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), wheelMultiplier: 0.95 });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -259,35 +259,39 @@
       prog.style.strokeDashoffset = 653.5 * (1 - st.v / 100);
       gsap.set('.loader__blades', { rotation: st.v * 0.9, svgOrigin: '0 0' });
     };
+    let seen = false;
+    try { seen = sessionStorage.getItem('da_seen') === '1'; } catch (e) { /* sin almacenamiento */ }
     const firstImg = $('.hero__slide.is-active img');
     const assets = Promise.all([
       document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve(),
       firstImg && firstImg.decode ? firstImg.decode().catch(() => {}) : Promise.resolve(),
-      new Promise((r) => setTimeout(r, 1500)),
+      new Promise((r) => setTimeout(r, seen ? 0 : 650)),
     ]);
 
-    const counting = gsap.to(st, { v: 92, duration: 1.7, ease: 'power2.out', onUpdate: render });
+    const counting = gsap.to(st, { v: 92, duration: seen ? 0.05 : 0.9, ease: 'power2.out', onUpdate: render });
     let revealed = false;
     const reveal = () => {
       if (revealed) return; revealed = true;
       counting.kill();
-      gsap.to(st, { v: 100, duration: 0.45, ease: 'power1.out', onUpdate: render, onComplete: open });
+      gsap.to(st, { v: 100, duration: seen ? 0.1 : 0.3, ease: 'power1.out', onUpdate: render, onComplete: open });
     };
     const open = () => {
+      try { sessionStorage.setItem('da_seen', '1'); } catch (e) { /* sin almacenamiento */ }
       const tl = gsap.timeline({ onComplete: () => { finish(); afterIntro(); } });
-      tl.to('.loader__top,.loader__count', { opacity: 0, duration: 0.3 }, 0)
-        .to(loader, { backgroundColor: 'rgba(8,11,9,0)', duration: 0.35, ease: 'none' }, 0.15)
-        .to(blades, { y: -135, duration: 1.15, ease: 'power3.inOut' }, 0.2)
-        .to(iris, { scale: 6, rotation: 40, duration: 1.35, ease: 'power3.in' }, 0.35)
-        .to('.hero__slide.is-active img', { scale: 1.06, duration: 2.4, ease: 'power3.out' }, 0.3)
-        .to(titleLines, { yPercent: 0, duration: 1.4, stagger: 0.12, ease: 'power4.out' }, 0.9)
-        .to('.hero__top,.hero__foot', { opacity: 1, duration: 1, stagger: 0.1 }, 1.25)
-        .to('.nav', { opacity: 1, duration: 0.9 }, 1.3)
-        .to(loader, { autoAlpha: 0, duration: 0.3 }, 1.5)
-        .add(() => { hero.start(); }, 1.6);
+      tl.to('.loader__top,.loader__count', { opacity: 0, duration: 0.25 }, 0)
+        .to(loader, { backgroundColor: 'rgba(8,11,9,0)', duration: 0.25, ease: 'none' }, 0.1)
+        .to(blades, { y: -135, duration: 0.85, ease: 'power3.inOut' }, 0.1)
+        .to(iris, { scale: 6, rotation: 40, duration: 1, ease: 'power3.in' }, 0.2)
+        .to('.hero__slide.is-active img', { scale: 1.06, duration: 1.8, ease: 'power3.out' }, 0.2)
+        .to(titleLines, { yPercent: 0, duration: 1.1, stagger: 0.1, ease: 'power4.out' }, 0.5)
+        .to('.hero__top,.hero__foot', { opacity: 1, duration: 0.8, stagger: 0.08 }, 0.75)
+        .to('.nav', { opacity: 1, duration: 0.7 }, 0.8)
+        .to(loader, { autoAlpha: 0, duration: 0.25 }, 0.95)
+        .add(() => { hero.start(); }, 1.05);
+      if (seen) tl.timeScale(1.5);
     };
     assets.then(reveal);
-    setTimeout(reveal, 7000); // red de seguridad
+    setTimeout(reveal, 4500); // red de seguridad
   }
 
   function afterIntro() {
@@ -323,6 +327,16 @@
   function initHumming() {
     const rows = $$('.hum__row');
     if (!rows.length) return;
+    // Las fotos llevan data-src: no se piden hasta que la sección esté cerca (evita bajar ~50 fotos al abrir la página)
+    const sec = $('.hum');
+    const wake = () => $$('img[data-src]', sec).forEach((im) => {
+      im.srcset = im.dataset.srcset; im.sizes = im.dataset.sizes; im.src = im.dataset.src;
+      im.removeAttribute('data-src'); im.removeAttribute('data-srcset'); im.removeAttribute('data-sizes');
+    });
+    if ('IntersectionObserver' in window) {
+      const o = new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting)) { wake(); o.disconnect(); } }, { rootMargin: '1400px 0px' });
+      o.observe(sec);
+    } else wake();
     const tweens = [];
     rows.forEach((row, i) => {
       const track = $('.hum__track', row), group = $('.hum__group', row);
@@ -523,35 +537,46 @@
       if (img.complete && img.naturalWidth) done(); else img.addEventListener('load', done, { once: true });
     });
 
-    // revelado al entrar en pantalla
-    if (!reduce) {
-      const medias = $$('.g-item__media', grid);
-      gsap.set(medias, { opacity: 0, y: 46 });
-      ScrollTrigger.batch(medias, {
-        start: 'top 94%', once: true,
-        onEnter: (batch) => {
-          const fresh = batch.filter((el) => !el.dataset.r);
-          fresh.forEach((el) => (el.dataset.r = '1'));
-          gsap.to(fresh, { opacity: 1, y: 0, duration: 1.1, stagger: 0.07, overwrite: 'auto', clearProps: 'transform' });
-        },
-      });
+    // revelado al entrar en pantalla: transiciones CSS + IntersectionObserver (casi sin costo con cientos de fotos)
+    const medias = $$('.g-item__media', grid);
+    if (!reduce && 'IntersectionObserver' in window) {
+      medias.forEach((m) => m.classList.add('rv'));
+      const io = new IntersectionObserver((entries) => {
+        let k = 0;
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.style.transitionDelay = Math.min(k++, 8) * 70 + 'ms';
+          e.target.classList.add('is-vis');
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -6% 0px' });
+      medias.forEach((m) => io.observe(m));
     }
+
+    const inRange = (el) => { const r = el.getBoundingClientRect(); return r.bottom > -300 && r.top < innerHeight + 700; };
 
     function apply(key, { instant = false } = {}) {
       if (key === current && !instant) return;
       current = key;
       chips.forEach((c) => { const on = c.dataset.filter === key; c.classList.toggle('is-active', on); c.setAttribute('aria-pressed', String(on)); });
       const match = (it) => key === 'all' || it.dataset.groups.split(' ').includes(key);
-      const state = Flip.getState(items);
+      const nextVisible = items.filter(match);
+      countEl.textContent = nextVisible.length;
+      let state = null;
+      if (!instant && !reduce) {
+        // Flip solo con las fotos que se ven (o están por verse): animar cientos a la vez congela la página
+        const now = items.filter((i) => !i.classList.contains('is-hidden') && inRange(i));
+        const leaving = now.filter((i) => !match(i)).slice(0, 40);
+        const staying = now.filter(match).slice(0, 60);
+        const entering = nextVisible.filter((i) => i.classList.contains('is-hidden')).slice(0, 40);
+        state = Flip.getState([...leaving, ...staying, ...entering]);
+      }
       items.forEach((it) => it.classList.toggle('is-hidden', !match(it)));
-      const visible = items.filter(match);
-      countEl.textContent = visible.length;
-      visible.forEach((it) => { const m = $('.g-item__media', it); if (m) { m.dataset.r = '1'; gsap.set(m, { opacity: 1, y: 0, clearProps: 'transform' }); } });
-      if (instant || reduce) { ScrollTrigger.refresh(); return; }
+      if (!state) { ScrollTrigger.refresh(); return; }
       Flip.from(state, {
-        duration: 0.9, ease: 'power3.inOut', absolute: true, nested: false,
-        onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.7, delay: 0.25 }),
-        onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.45 }),
+        duration: 0.8, ease: 'power3.inOut', absolute: true, nested: false,
+        onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.6, delay: 0.2 }),
+        onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.4 }),
         onComplete: () => ScrollTrigger.refresh(),
       });
     }

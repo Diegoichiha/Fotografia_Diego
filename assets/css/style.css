@@ -28,7 +28,7 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body.is-loading{overflow:hidden}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
@@ -47,9 +47,7 @@ h1,h2,h3,h4,p,figure{margin:0}
 .skip{position:fixed;left:12px;top:-60px;z-index:300;background:var(--accent);color:var(--bg);padding:.7em 1.1em;border-radius:6px;transition:top .2s}
 .skip:focus{top:12px}
 
-/* ── Grano + progreso ── */
-.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+/* ── Progreso ── */
 .progress{position:fixed;left:0;top:0;right:0;height:2px;z-index:80;pointer-events:none}
 .progress span{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0)}
 
@@ -288,6 +286,8 @@ html.no-js .hero__slide:first-child{visibility:visible}
 .g-item__media{position:absolute;inset:0;display:block;overflow:hidden}
 .g-item__media img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s var(--ease),filter .6s,opacity .9s}
 html.js .g-item__media img:not(.is-in){opacity:0}
+.g-item__media.rv{opacity:0;transform:translateY(46px);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
+.g-item__media.rv.is-vis{opacity:1;transform:none}
 .g-item__btn:hover img{transform:scale(1.07)}
 .g-item__cap{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:46px 16px 14px;background:linear-gradient(to top,rgba(8,11,9,.86),rgba(8,11,9,0));transform:translateY(101%);transition:transform .6s var(--ease)}
 .g-item__cap b{font-family:var(--serif);font-weight:400;font-size:1.35rem;line-height:1.05}

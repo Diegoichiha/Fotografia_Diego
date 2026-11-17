@@ -186,13 +186,16 @@ def src_default(p, target=900):
     return f"img/photos/{p['file']}-{w}.webp"
 
 
-def img_tag(p, sizes, cls="", loading="lazy", priority=False, alt=None, style="", extra=""):
+def img_tag(p, sizes, cls="", loading="lazy", priority=False, alt=None, style="", extra="", defer=False):
     big = p["widths"][-1]
     ratio_h = round(big / p["ratio"])
+    if defer:  # la foto se pide cuando el JS lo decide (ver initHumming)
+        pix = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+        loadattrs = [f'src="{pix}"', f'data-src="{src_default(p)}"', f'data-srcset="{srcset(p)}"', f'data-sizes="{sizes}"']
+    else:
+        loadattrs = [f'src="{src_default(p)}"', f'srcset="{srcset(p)}"', f'sizes="{sizes}"']
     attrs = [
-        f'src="{src_default(p)}"',
-        f'srcset="{srcset(p)}"',
-        f'sizes="{sizes}"',
+        *loadattrs,
         f'width="{big}" height="{ratio_h}"',
         f'alt="{esc(alt if alt is not None else p["alt"])}"',
         'decoding="async"',
@@ -329,7 +332,7 @@ def build_humming(by, photos, cat):
     for r in rows:
         items = "\n".join(
             f'<button class="hum__item" data-lb="{esc(p["file"])}" data-cursor="Ver" style="--r:{p["ratio"]};--c:{p["avg"]}" aria-label="Ampliar: {esc(ttl(p))}">'
-            + img_tag(p, "(max-width: 700px) 50vw, 30vw", alt=p["alt"]) + "</button>"
+            + img_tag(p, "(max-width: 700px) 50vw, 30vw", alt=p["alt"], defer=True) + "</button>"
             for p in r
         )
         out.append(f'<div class="hum__row"><div class="hum__track"><div class="hum__group">\n{items}\n</div></div></div>')
