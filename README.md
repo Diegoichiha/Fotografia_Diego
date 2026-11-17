@@ -67,3 +67,15 @@ Las especies del catálogo son una identificación preliminar: **revisar con Die
 ## Publicar
 
 Es un sitio 100 % estático con rutas relativas: sirve en GitHub Pages (rama `main`, carpeta raíz) o en cualquier hosting estático.
+
+### Hostinger (con dominio propio)
+
+1. En `data/site.json` poner `"url": "https://tu-dominio.com"` y correr `python build.py` (agrega `canonical`, `og:url`, `sitemap.xml` y el `Sitemap:` de `robots.txt`). Subir el cambio a `main`.
+2. hPanel → **Sitios web** → el dominio → **Avanzado → Git** → crear repositorio:
+   - Repositorio: `https://github.com/Diegoichiha/Fotografia_Diego.git` (es público, no pide llave SSH)
+   - Rama: `main`
+   - Carpeta de instalación: vacía (queda en `public_html`; Hostinger pide que esté vacía: borrar el `default.php` si aparece)
+3. Pulsar **Implementar**. Para que cada push a `main` actualice el sitio, copiar la URL de **Implementación automática** (webhook) y pegarla en GitHub → repo → Settings → Webhooks → Add webhook (Content type `application/json`, evento *push*).
+4. Activar el SSL gratuito del dominio (hPanel → SSL) y revisar que `https://tu-dominio.com` cargue.
+
+El `.htaccess` del repo fuerza HTTPS y quita el `www`, comprime, cachea fotos/CSS/JS, muestra `404.html` y bloquea `build.py`, `README.md`, `src/`, `data/` y `.git`. CSS y JS llevan `?v=<huella>` para que el navegador los recargue cuando cambian.

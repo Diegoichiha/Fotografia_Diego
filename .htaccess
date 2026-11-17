@@ -1,0 +1,52 @@
+# ───────────────────────────────────────────────
+# Portafolio Diego Aranzazu · Hostinger (LiteSpeed / Apache)
+# Este archivo viaja en el repo y reemplaza al del servidor en cada deploy.
+# ───────────────────────────────────────────────
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Siempre HTTPS y sin "www"
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# Archivos del proyecto que no deben servirse al público
+RewriteRule ^(build\.py|README\.md|\.gitignore|\.git(/|$)|src/|data/|_originales/) - [F,L]
+</IfModule>
+
+<IfModule mod_mime.c>
+AddType image/webp .webp
+AddType font/woff2 .woff2
+AddType image/svg+xml .svg
+</IfModule>
+
+# Compresión
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript text/javascript application/json application/ld+json image/svg+xml
+</IfModule>
+
+# Caché del navegador: el HTML se revisa seguido; CSS/JS llevan ?v=huella y las fotos casi no cambian
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 1 hour"
+ExpiresByType text/html "access plus 10 minutes"
+ExpiresByType text/css "access plus 1 year"
+ExpiresByType application/javascript "access plus 1 year"
+ExpiresByType text/javascript "access plus 1 year"
+ExpiresByType image/webp "access plus 6 months"
+ExpiresByType image/jpeg "access plus 6 months"
+ExpiresByType image/svg+xml "access plus 6 months"
+ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+Header set X-Content-Type-Options "nosniff"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

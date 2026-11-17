@@ -11,6 +11,7 @@ Genera: img/photos/*.webp, img/about/*.webp, img/og.jpg, index.html
 import json
 import os
 import sys
+import hashlib
 import html
 from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime
@@ -207,6 +208,11 @@ def img_tag(p, sizes, cls="", loading="lazy", priority=False, alt=None, style=""
     if extra:
         attrs.append(extra)
     return "<img " + " ".join(attrs) + ">"
+
+
+def fingerprint(rel):
+    """Huella corta del archivo, para que el navegador recargue CSS/JS cuando cambian (?v=...)."""
+    return "?v=" + hashlib.md5((ROOT / rel).read_bytes()).hexdigest()[:8]
 
 
 def ttl(p):
@@ -532,6 +538,9 @@ def main():
         "YEAR": str(site["year"]),
         "DESCRIPTION": esc(site["description"]),
         "OG_IMAGE": esc(site["url"].rstrip("/") + "/img/og.jpg") if site.get("url") else "img/og.jpg",
+        "CANONICAL": f'<link rel="canonical" href="{esc(site["url"].rstrip("/") + "/")}">' if site.get("url") else "",
+        "CSS_V": fingerprint("assets/css/style.css"),
+        "JS_V": fingerprint("assets/js/main.js"),
         "OG_URL_META": f'<meta property="og:url" content="{esc(site["url"])}">' if site.get("url") else "",
         "JSONLD": json.dumps(jsonld, ensure_ascii=False),
         "HERO_PRELOAD": build_hero_preload(by, cat),
@@ -577,6 +586,22 @@ def main():
     if left:
         raise SystemExit(f"Placeholders sin resolver: {sorted(set(left))}")
     (ROOT / "index.html").write_text(tpl, encoding="utf-8")
+
+    # robots.txt y sitemap.xml (con dominio, si está definido en data/site.json)
+    base = site.get("url", "").rstrip("/")
+    robots = "User-agent: *\nAllow: /\n"
+    if base:
+        robots += f"\nSitemap: {base}/sitemap.xml\n"
+        (ROOT / "sitemap.xml").write_text(
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            f"  <url><loc>{base}/</loc><lastmod>{datetime.now().strftime('%Y-%m-%d')}</lastmod><priority>1.0</priority></url>\n"
+            "</urlset>\n",
+            encoding="utf-8",
+        )
+    elif (ROOT / "sitemap.xml").exists():
+        (ROOT / "sitemap.xml").unlink()
+    (ROOT / "robots.txt").write_text(robots, encoding="utf-8")
     total = sum(f.stat().st_size for f in (IMG).rglob("*") if f.is_file())
     print(f"OK - {len(photos)} fotos - img/ = {total / 1e6:.1f} MB - index.html {len(tpl) / 1024:.0f} KB")
 
