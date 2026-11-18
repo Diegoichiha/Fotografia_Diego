@@ -52,6 +52,43 @@
     return $$('.w', el);
   }
 
+  /* ═════════ Encuadre inteligente: la cabeza del ave siempre dentro del recorte ═════════ */
+  // object-fit:cover recorta según el punto focal, pero en pantallas angostas (celular) se pierde la cara.
+  // Aquí se calcula el object-position exacto para que la cabeza (data-hx/hy = centro, data-hw = ancho) quede centrada;
+  // si la cabeza no cabe ni centrada (data-fit="safe"), se muestra la foto completa.
+  function frameImg(img) {
+    const hx = parseFloat(img.dataset.hx), hy = parseFloat(img.dataset.hy);
+    if (isNaN(hx) || isNaN(hy)) return;
+    const cw = img.clientWidth, ch = img.clientHeight;
+    const iw = parseFloat(img.getAttribute('width')), ih = parseFloat(img.getAttribute('height'));
+    if (!cw || !ch || !iw || !ih) return;
+    const tx = 0.5, ty = parseFloat(img.dataset.ty || '0.5');
+    const s = Math.max(cw / iw, ch / ih), sw = iw * s, sh = ih * s;
+    const hw = parseFloat(img.dataset.hw || '0');
+    if (img.dataset.fit === 'safe' && hw && hw * sw > cw * 0.92) {
+      img.style.objectFit = 'contain';
+      img.style.objectPosition = '50% ' + ty * 100 + '%';
+      img.style.transformOrigin = '50% ' + ty * 100 + '%';
+      return;
+    }
+    img.style.objectFit = '';
+    const ox = sw > cw + 0.5 ? clamp((hx * sw - tx * cw) / (sw - cw)) : 0.5;
+    const oy = sh > ch + 0.5 ? clamp((hy * sh - ty * ch) / (sh - ch)) : 0.5;
+    img.style.objectPosition = (ox * 100).toFixed(2) + '% ' + (oy * 100).toFixed(2) + '%';
+    img.style.transformOrigin = (hx * sw - ox * (sw - cw)).toFixed(1) + 'px ' + (hy * sh - oy * (sh - ch)).toFixed(1) + 'px';
+  }
+  function initFraming() {
+    const run = () => $$('img[data-hx]').forEach(frameImg);
+    run();
+    let t = null;
+    const later = () => { clearTimeout(t); t = setTimeout(run, 120); };
+    window.addEventListener('resize', later);
+    window.addEventListener('orientationchange', later);
+    window.addEventListener('load', run);
+    if (window.ResizeObserver) { const ro = new ResizeObserver(later); $$('.hero, .marquee, .coll__list, .burst__stage').forEach((el) => ro.observe(el)); }
+    window.__frameAll = run;
+  }
+
   /* ═════════ Cursor personalizado ═════════ */
   function initCursor() {
     if (!finePointer || reduce) return;
@@ -725,6 +762,7 @@
   safe('hero', initHero);
   safe('marquee', initMarquee);
   safe('humming', initHumming);
+  safe('framing', initFraming);
   safe('intro', initIntro);
   safe('gallery', initGallery);
   safe('collections', initCollections);

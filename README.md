@@ -46,6 +46,10 @@ npx http-server . -p 5230 -c-1
 
 Requiere Python 3.12 con Pillow (`pip install pillow`).
 
+## Encuadre de las aves (cara siempre visible)
+
+Las fotos que se recortan (portada, ráfagas, miniaturas de colecciones, píldoras del marquee) usan la posición de la **cabeza** del ave: `data/photos.json` → `heads` (`"IMG_0033": [x, y, ancho]`, en % de la foto). El JS (`frameImg` en `assets/js/main.js`) centra esa cabeza en cualquier tamaño de pantalla y, si no cabe, muestra la foto completa. Para una foto nueva que vaya en la portada o en otra zona recortada, agregar su entrada en `heads`.
+
 ## Agregar o cambiar una foto
 
 1. Copiar el JPG a `_originales/` (p. ej. `IMG_2000.jpg`; si viene en HEIC, convertirlo antes a JPG).

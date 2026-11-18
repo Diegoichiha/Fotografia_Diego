@@ -186,7 +186,16 @@ def src_default(p, target=900):
     return f"img/photos/{p['file']}-{w}.webp"
 
 
-def img_tag(p, sizes, cls="", loading="lazy", priority=False, alt=None, style="", extra="", defer=False):
+def head_of(p):
+    """Cabeza del ave como fracciones [x, y, ancho]: de data/photos.json (heads) o, si falta, del punto focal."""
+    h = p.get("head")
+    if h:
+        return [h[0] / 100, h[1] / 100, h[2] / 100]
+    f = p.get("focus", [50, 50])
+    return [f[0] / 100, f[1] / 100, 0.2]
+
+
+def img_tag(p, sizes, cls="", loading="lazy", priority=False, alt=None, style="", extra="", defer=False, frame=None):
     big = p["widths"][-1]
     ratio_h = round(big / p["ratio"])
     if defer:  # la foto se pide cuando el JS lo decide (ver initHumming)
@@ -210,6 +219,13 @@ def img_tag(p, sizes, cls="", loading="lazy", priority=False, alt=None, style=""
         attrs.append(f'style="{style}"')
     if extra:
         attrs.append(extra)
+    if frame is not None:  # recorte inteligente: el JS centra la cabeza del ave (ver frameImg en main.js)
+        hx, hy, hw = head_of(p)
+        attrs.append(f'data-hx="{hx:.4f}" data-hy="{hy:.4f}" data-hw="{hw:.4f}"')
+        if "ty" in frame:
+            attrs.append(f'data-ty="{frame["ty"]}"')
+        if frame.get("fit"):
+            attrs.append(f'data-fit="{frame["fit"]}"')
     return "<img " + " ".join(attrs) + ">"
 
 
@@ -250,7 +266,7 @@ def build_hero(by, cfg):
         sp = p["common"] + (f" — {p['latin']}" if p.get("latin") else "")
         slides.append(
             f'<div class="hero__slide{" is-active" if i == 0 else ""}" data-title="{esc(ttl(p))}" data-sp="{esc(sp)}" data-id="{esc(f)}" style="--fx:{fx}%;--fy:{fy}%;--c:{p["avg"]}">'
-            + img_tag(p, "100vw", cls="hero__img", priority=(i == 0), loading="eager" if i < 2 else "lazy", alt=p["alt"])
+            + img_tag(p, "100vw", cls="hero__img", priority=(i == 0), loading="eager" if i < 2 else "lazy", alt=p["alt"], frame={"ty": 0.42, "fit": "safe"})
             + "</div>"
         )
     return "\n".join(slides)
@@ -273,7 +289,7 @@ def build_marquee(by, cfg):
             p = pills[(i // 2) % len(pills)]
             parts.append(
                 '<span class="marquee__pill">'
-                + img_tag(p, "240px", alt="", extra='aria-hidden="true"')
+                + img_tag(p, "240px", alt="", extra='aria-hidden="true"', frame={})
                 + "</span>"
             )
         else:
@@ -311,8 +327,8 @@ def build_bursts(by, cfg):
         fa, fb = pa["focus"], pb["focus"]
         pairs.append(
             f'''<figure class="burst__pair" data-i="{i}" data-dt="{esc(dts)}" data-meta-a="{esc(pa["meta"])}" data-meta-b="{esc(pb["meta"])}">
-  <div class="burst__frame burst__frame--a" style="--fx:{fa[0]}%;--fy:{fa[1]}%">{img_tag(pa, "(max-width: 900px) 92vw, 60vw", alt=pa["alt"])}</div>
-  <div class="burst__frame burst__frame--b" style="--fx:{fb[0]}%;--fy:{fb[1]}%">{img_tag(pb, "(max-width: 900px) 92vw, 60vw", alt=pb["alt"])}</div>
+  <div class="burst__frame burst__frame--a" style="--fx:{fa[0]}%;--fy:{fa[1]}%">{img_tag(pa, "(max-width: 900px) 92vw, 60vw", alt=pa["alt"], frame={})}</div>
+  <div class="burst__frame burst__frame--b" style="--fx:{fb[0]}%;--fy:{fb[1]}%">{img_tag(pb, "(max-width: 900px) 92vw, 60vw", alt=pb["alt"], frame={})}</div>
   <span class="burst__scan" aria-hidden="true"></span>
   <span class="burst__tag burst__tag--a mono">A</span><span class="burst__tag burst__tag--b mono">B</span>
 </figure>'''
@@ -359,11 +375,11 @@ def build_collections(by, photos, groups):
   <span class="coll__blurb">{esc(g["blurb"])}</span>
   <span class="coll__count mono">{pad(n)} fotos</span>
   <span class="coll__arrow" aria-hidden="true">↗</span>
-  <span class="coll__thumb">{img_tag(cover, "160px", alt="")}</span>
+  <span class="coll__thumb">{img_tag(cover, "160px", alt="", frame={})}</span>
 </a></li>'''
         )
         previews.append(
-            f'<div class="coll__pv" data-i="{i}" style="--c:{cover["avg"]}">{img_tag(cover, "30vw", alt="", style=f"object-position:{cover["focus"][0]}% {cover["focus"][1]}%")}</div>'
+            f'<div class="coll__pv" data-i="{i}" style="--c:{cover["avg"]}">{img_tag(cover, "30vw", alt="", frame={})}</div>'
         )
     return "\n".join(rows), "\n".join(previews), order
 
@@ -490,6 +506,10 @@ def main():
     with ProcessPoolExecutor(max_workers=max(2, (os.cpu_count() or 4) - 1)) as ex:
         photos = list(ex.map(process_photo, photos, chunksize=2))
     photos = interleave(photos)
+    heads = cat.get("heads", {})
+    for p in photos:
+        if p["file"] in heads:
+            p["head"] = heads[p["file"]]
     by = {p["file"]: p for p in photos}
     about = process_about()
     make_og(by[cat["hero"][0]])
@@ -551,7 +571,7 @@ def main():
         "HERO_COUNT": pad(len(cat["hero"])),
         "MARQUEE": build_marquee(by, cat),
         "MANIFESTO": esc(site["manifesto"]),
-        "INTRO_IMG": img_tag(intro, "(max-width: 900px) 50vw, 24vw", alt=intro["alt"]),
+        "INTRO_IMG": img_tag(intro, "(max-width: 900px) 50vw, 24vw", alt=intro["alt"], frame={}),
         "INTRO_CAP": species_line(intro),
         "STAT_PHOTOS": str(len(photos)),
         "STAT_FOCAL": f"{max_focal:.0f}",
