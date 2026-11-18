@@ -438,11 +438,8 @@
         gsap.from(s, { opacity: 0.25, scale: 0.94, ease: 'none', scrollTrigger: { trigger: s, containerAnimation: tween, start: 'left 100%', end: 'left 70%', scrub: true } });
       });
     });
-    mm.add('(max-width: 900px), (prefers-reduced-motion: reduce)', () => {
-      const track = $('.sel__track');
-      if (track) track.setAttribute('data-lenis-prevent', '');
-      return () => track && track.removeAttribute('data-lenis-prevent');
-    });
+    // En móvil el carrusel se desplaza de forma nativa. OJO: no usar data-lenis-prevent aquí: Lenis le aplica
+    // overscroll-behavior:contain y el scroll vertical queda atrapado cuando el dedo o la rueda está sobre el carrusel.
   }
 
   /* ═════════ Ráfagas ═════════ */
